@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 # ref: https://www.webnots.com/emoji-shortcuts-for-whatsapp-web-and-desktop/
-# offer grp: JCfPqpmhXroGe0c94WsDRe, only me grp: DXqnN42tpV27ZoVWszBH9D
+# offer group: JCfPqpmhXroGe0c94WsDRe, only me group: DXqnN42tpV27ZoVWszBH9D
 
 # import
 import pandas as pd
@@ -146,10 +143,3 @@ pywhatkit.sendwhatmsg_to_group_instantly(group_id='JCfPqpmhXroGe0c94WsDRe', mess
 # stats
 elapsed_time = time.time() - start_time
 print('\nElapsed time to report: ' + str(round(elapsed_time / 60.00, 2)))
-
-
-# In[ ]:
-
-
-
-
