@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 ## import
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -17,10 +14,6 @@ import os
 from google.cloud.vision_v1 import Image, types
 from google.cloud import vision_v1
 import win32com.client
-
-
-# In[2]:
-
 
 ## scrape
 
@@ -46,10 +39,6 @@ new_banners = []
 act_banners = []
 banners_old_df = pd.read_csv("banners.csv")
 old_banners = banners_old_df['banner_src'].tolist()
-
-
-# In[3]:
-
 
 ## Pandamart
 
@@ -77,10 +66,6 @@ for s in soup:
     act_banners.append(b)
     if b not in old_banners: new_banners.append(b)
 
-
-# In[4]:
-
-
 ## Daraz
 
 # url
@@ -94,10 +79,6 @@ for s in soup:
     except: b = s["src"]
     act_banners.append(b)
     if b not in old_banners: new_banners.append(b)
-
-
-# In[5]:
-
 
 ## Shajgoj
 
@@ -132,10 +113,6 @@ for i in range(0, len_soup):
         act_banners.append(b)
         if b not in old_banners: new_banners.append(b)
 
-
-# In[6]:
-
-
 ## API
 
 # credentials
@@ -148,11 +125,6 @@ for bnr in new_banners:
     for t in types:
         if t in bnr.lower(): typ = t
         
-#     # response
-#     try: image = vision_v1.types.Image(source = vision_v1.types.ImageSource(image_uri = bnr.split(typ)[0] + typ))
-#     except: continue
-#     response = client.text_detection(image = image)
-
     # response
     image = vision_v1.types.Image(source = vision_v1.types.ImageSource(image_uri = bnr.split(typ)[0] + typ))
     response = client.text_detection(image = image)
@@ -174,19 +146,11 @@ for bnr in new_banners:
     # show
     print("Banner: " + bnr + "\nText: " + txt + "\nUnilever? " + str(if_ubl) + "\n")
 
-
-# In[7]:
-
-
 ## store banners
 banners_new_df = pd.DataFrame()
 banners_new_df['banner_src'] = new_banners
 banners_new_df['banner_ubl'] = if_unilever
 duckdb.query('''select * from banners_old_df union select * from banners_new_df''').df().to_csv("banners.csv", index = False)
-
-
-# In[8]:
-
 
 ## to report
 if len(new_banners) > 0:
@@ -202,10 +166,6 @@ if len(new_banners) > 0:
     banners_new_df = duckdb.query(qry).df()
     new_banners = banners_new_df['banner_src'].tolist()
     if_unilever = banners_new_df['banner_ubl'].tolist()
-
-
-# In[9]:
-
 
 ## email
 
@@ -234,19 +194,8 @@ newmail.Subject = "New Competition Banners"
 newmail.CC = "Eagle Eye - Alerts <93f21d6e.Unilever.onmicrosoft.com@emea.teams.ms>; avra.barua@unilever.com; safa-e.nafee@unilever.com; rafid-al.mahmood@unilever.com; zoya.rashid@unilever.com; samsuddoha.nayeem@unilever.com; sudipta.saha@unilever.com; asif.rezwan@unilever.com; shithi.maitra@unilever.com"
 if len(new_banners) > 0: newmail.Send()
 
-
-# In[10]:
-
-
 ## statistics
 print("Total banners: " + str(len(act_banners)))
 print("New banners: " + str(len(new_banners)))
 print("Elapsed time to report (sec): " + str(round(time.time() - start_time)))
 driver.close()
-
-
-# In[ ]:
-
-
-
-
