@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# offer grp: JCfPqpmhXroGe0c94WsDRe, only me grp: DXqnN42tpV27ZoVWszBH9D
+# offer group: JCfPqpmhXroGe0c94WsDRe, only me group: DXqnN42tpV27ZoVWszBH9D
 
 # import
 from selenium import webdriver
