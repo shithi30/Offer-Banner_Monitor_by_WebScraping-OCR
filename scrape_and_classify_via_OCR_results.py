@@ -199,3 +199,4 @@ print("Total banners: " + str(len(act_banners)))
 print("New banners: " + str(len(new_banners)))
 print("Elapsed time to report (sec): " + str(round(time.time() - start_time)))
 driver.close()
+
