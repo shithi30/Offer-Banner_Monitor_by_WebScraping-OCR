@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 # offer grp: JCfPqpmhXroGe0c94WsDRe, only me grp: DXqnN42tpV27ZoVWszBH9D
 
 # import
@@ -138,18 +135,12 @@ df_now = duckdb.query(qry).df().fillna('')
 res = sheet.values().clear(spreadsheetId=SAMPLE_SPREADSHEET_ID, range='Offers').execute()
 res = sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="'Offers'!A1", valueInputOption='USER_ENTERED', body={'values': [df_now.columns.values.tolist()] + df_now.values.tolist()}).execute()
 
-# # send
-# emo = ':checkmark\t' if len(ubl_skus)>=10 else ':warning\t'
-# msg = emo + " Auto Update: " + str(len(ubl_skus)) + " Unilever offers, among total " + str(len(skus)) + ", are currently running on Chaldal.com.\n" + "\n".join(ubl_skus) + "\n* Location: " + loc
-# pywhatkit.sendwhatmsg_to_group_instantly(group_id="DXqnN42tpV27ZoVWszBH9D", message=msg, tab_close=True)
+# send
+emo = ':checkmark\t' if len(ubl_skus)>=10 else ':warning\t'
+msg = emo + " Auto Update: " + str(len(ubl_skus)) + " Unilever offers, among total " + str(len(skus)) + ", are currently running on Chaldal.com.\n" + "\n".join(ubl_skus) + "\n* Location: " + loc
+pywhatkit.sendwhatmsg_to_group_instantly(group_id="DXqnN42tpV27ZoVWszBH9D", message=msg, tab_close=True)
 
 # stats
 elapsed_time = time.time() - start_time
 print("Elapsed time to report (sec): " + str(round(elapsed_time)))
-
-
-# In[ ]:
-
-
-
 
