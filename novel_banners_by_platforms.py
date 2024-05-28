@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
 ## import
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -20,10 +17,6 @@ from google.oauth2 import service_account
 import win32com.client
 import time
 
-
-# In[2]:
-
-
 ## scrape
 
 # preferences
@@ -31,17 +24,13 @@ start_time = time.time()
 options = webdriver.ChromeOptions()
 options.add_argument("ignore-certificate-errors")
 
-## headless
-# options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
-# options.add_argument("headless")
+# headless
+options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
+options.add_argument("headless")
 
 # open window
 driver = webdriver.Chrome(options = options)
 driver.maximize_window()
-
-
-# In[3]:
-
 
 ## OHSOGO
 
@@ -84,10 +73,6 @@ osgo_df['banner_source'] = list(img_links)
 osgo_df['platform'] = 'OHSOGO'
 osgo_df['platform_link'] = osgo_url
 
-
-# In[4]:
-
-
 ## Pandamart
 
 # url
@@ -126,10 +111,6 @@ pmrt_df['banner_source'] = [soup[i]["src"] for i in range(0, len_soup)]
 pmrt_df['platform'] = 'Pandamart'
 pmrt_df['platform_link'] = urls[0]
 
-
-# In[5]:
-
-
 ## Daraz
 
 # url
@@ -159,10 +140,6 @@ daaz_df = pd.DataFrame()
 daaz_df['banner_source'] = img_links
 daaz_df['platform'] = 'Daraz'
 daaz_df['platform_link'] = daraz_url
-
-
-# In[6]:
-
 
 ## Shajgoj
 
@@ -208,10 +185,6 @@ shaj_df['banner_source'] = img_links
 shaj_df['platform'] = 'Shajgoj'
 shaj_df['platform_link'] = shaj_url
 
-
-# In[7]:
-
-
 ## services
 
 # credentials
@@ -223,10 +196,6 @@ SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 creds = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 service = build("sheets", "v4", credentials=creds)
 sheet = service.spreadsheets()
-
-
-# In[8]:
-
 
 ## ETL
 
@@ -251,10 +220,6 @@ sheet.values().clear(spreadsheetId=SAMPLE_SPREADSHEET_ID, range='Banners!B1:F').
 sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID, range='Banners!B1', valueInputOption='USER_ENTERED', body={'values': [pres_df.columns.values.tolist()] + pres_df.fillna('').values.tolist()}).execute()
 driver.close()
 
-
-# In[9]:
-
-
 ## new
 
 # new banners
@@ -273,10 +238,6 @@ for i in range(0, len_links):
     img_link = new_links[i]
     img_data = Image.open(requests.get(img_link, stream = True, verify = True).raw).convert("RGB")
     img_data.save(path + "new_" + str(i+1) + "_" + new_pltfm[i] + ".jpg", "JPEG")
-
-
-# In[10]:
-
 
 ## email
 
@@ -315,10 +276,4 @@ for f in files: ret = newmail.Attachments.Add(f) if len_links > 0 else None
 newmail.To = "avra.barua@unilever.com; safa-e.nafee@unilever.com; rafid-al.mahmood@unilever.com; anulekha.chowdhuri2@unilever.com"
 newmail.BCC = "shithi30@outlook.com"
 if len_links > 0: newmail.Send()
-
-
-# In[ ]:
-
-
-
 
