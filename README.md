@@ -34,5 +34,5 @@ Unilever Bangladesh Ltd actively monitored online competition by competitor acti
 </p>
 
 <p align="center">
-<strong>Note:</strong> All crawlers are in compliance with *robots.txt* guidelines.
+<strong>Note:</strong> All crawlers are in compliance with robots.txt guidelines.
 </p>
