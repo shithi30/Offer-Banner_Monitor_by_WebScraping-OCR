@@ -32,3 +32,5 @@ Unilever Bangladesh Ltd actively monitored online competition by competitor acti
 <p align="center">
 <img width="780" alt="ee2" src="https://github.com/shithi30/Unilever_eCommerce_Offers-Banners_Monitoring_byOCR/assets/43873081/f297a575-e765-485d-8c8d-93bd6fe29cc5">
 </p>
+
+**Note:** All crawlers are in compliance with *robots.txt* guidelines.
