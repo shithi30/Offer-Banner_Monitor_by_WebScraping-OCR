@@ -1,3 +1,9 @@
+Unilever Bangladesh Ltd actively monitored online competition by competitor activity monitoring. In this project:
+- Competition in marketplaces are actively monitored by reading, identifying, storing, reporting new banner images.
+- Paid offer blocks are monitored hourly across multiple e-Commerce, to ensurecompetitive positioning and availability.
+
+**Tech Stack:** Language - `Python` , Automation & Scraping - `Selenium, bs4, requests, DuckDB, Windows Scheduler` , Google Cloud - `Vision and GSheet APIs`
+
 ### Banners by Accounts - biHourly Reporting
 <p align="center">
   <img width="650" alt="packshot_daraz" src="https://github.com/shithi30/Unilever_eCommerce_Offers-Banners_Monitoring_byOCR/assets/43873081/258c0535-9899-4ab6-98a3-5a6b64d2c5a9"><br>
